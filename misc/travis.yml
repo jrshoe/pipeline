@@ -1,0 +1,30 @@
+language: 
+  - python
+
+python:
+  - 2.6
+  - 3.7
+
+env:
+  - JAVA_VER=10
+  - JAVA_VER=11
+  - JAVA_VER=12
+  - RUBY_VER=2
+  - RUBY_VER=3
+  - foo=/bar
+
+matrix:
+  exclude:
+    - python: 2.6
+      env: JAVA_VER=12 RUBY_VER=2
+    - python: 3.7
+      env: RUBY_VER=2
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y -q mydependency
+
+install: 
+  - ./bin/buildout
+script: 
+  - ./bin/test
